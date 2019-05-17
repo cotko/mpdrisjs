@@ -1,0 +1,38 @@
+[Unit]
+Description=Music Player Daemon mpdris service
+Documentation=https://github.com/cotko/mpdrisjs
+# requires MPD to be started
+After=mpd.service
+# stop / restart if MPD service is stopped
+BindsTo=mpd.service
+
+[Service]
+Type=simple
+ExecStart=/mnt/klet/koda/cotko/mpdrisjs/mpdrisjs
+Restart=on-failure
+
+# Enable this setting to ask systemd to watch over MPD, see
+# systemd.service(5).  This is disabled by default because it causes
+# periodic wakeups which are unnecessary if MPD is not playing.
+#WatchdogSec=120
+
+# disallow writing to /usr, /bin, /sbin, ...
+ProtectSystem=yes
+
+# more paranoid security settings
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+# AF_NETLINK is required by libsmbclient, or it will exit() .. *sigh*
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
+RestrictNamespaces=yes
+
+# Note that "ProtectKernelModules=yes" is missing in the user unit
+# because systemd 232 is unable to reduce its own capabilities
+# ("Failed at step CAPABILITIES spawning /usr/bin/mpd: Operation not
+# permitted")
+
+[Install]
+WantedBy=multi-user.target
+# start if mpd service is started
+WantedBy=mpd.service

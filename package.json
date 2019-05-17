@@ -1,0 +1,22 @@
+{
+  "name": "mpdrisjs",
+  "version": "1.0.0",
+  "description": "MPRIS service for MPD written in node.js",
+  "main": "mpdrisjs",
+  "author": "Cotko <cotkocot@gmail.com>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "lint": "standard ./lib/**/*.js",
+    "lint-fix": "standard ./lib/**/*.js --fix"
+  },
+  "dependencies": {
+    "mpd-api": "^1.0.2",
+    "mpris-service": "^2.1.0",
+    "network-address": "^1.1.2",
+    "rxjs": "^6.5.2",
+    "which": "^1.3.1"
+  },
+  "devDependencies": {
+    "standard": "^12.0.1"
+  }
+}
